@@ -7,7 +7,7 @@ export default function Home() {
         Button
       </Button>
       <p className="text-center text-xl text-brand-600">
-        This is a demo of the geist-sans font
+        This is a demo of the sans font
       </p>
       <p className="text-lg text-muted">testing a default color</p>
     </div>
