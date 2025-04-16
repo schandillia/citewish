@@ -4,11 +4,8 @@ import Link from "next/link"
 
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { buttonVariants } from "@/components/ui/button"
-
-// Import buttonVariants from the correct location
 import brand from "@/lib/brand.json"
 import ThemeToggle from "@/components/theme/theme-toggle"
-// import ThemeToggle from "./theme/theme-toggle"
 
 // Get the current year dynamically
 const d = new Date()
@@ -32,7 +29,7 @@ export default function Footer() {
       {/* <div className="flex-grow" /> */}
       <div
         className="inset-x-0 bottom-0 w-full border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-brand-900/75 text-sm text-soft dark:text-white/70"
-        role="contentinfo" // Landmark role for footer
+        role="contentinfo"
       >
         <MaxWidthWrapper>
           <div
@@ -48,8 +45,8 @@ export default function Footer() {
 
             {/* Footer Links Section */}
             <div
-              className="flex py-2 sm:py-0 gap-4 items-center"
-              aria-label="Footer links" // Label the link section for screen readers
+              className="flex py-2 sm:py-0 gap-4 items-center flex-wrap max-w-full overflow-hidden"
+              aria-label="Footer links"
             >
               {links.map((link, index) => (
                 <React.Fragment key={link.id}>
@@ -68,8 +65,8 @@ export default function Footer() {
                   {/* Divider - border between links */}
                   {index !== links.length - 1 && (
                     <div
-                      className="border-l border-gray-200 dark:border-gray-800 h-6"
-                      aria-hidden="true" // Hide the divider from screen readers
+                      className="border-l border-gray-300 dark:border-gray-500 h-6"
+                      aria-hidden="true"
                     />
                   )}
                 </React.Fragment>

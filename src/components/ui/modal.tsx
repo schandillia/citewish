@@ -15,6 +15,7 @@ interface ModalProps {
   onClose?: () => void
   desktopOnly?: boolean
   preventDefaultClose?: boolean
+  title?: string
 }
 
 export const Modal = ({
@@ -25,6 +26,7 @@ export const Modal = ({
   preventDefaultClose,
   setShowModal,
   showModal,
+  title,
 }: ModalProps) => {
   const closeModal = ({ dragged }: { dragged?: boolean }) => {
     if (preventDefaultClose && !dragged) {
@@ -87,7 +89,7 @@ export const Modal = ({
           <Drawer.Portal>
             <Drawer.Content
               className={cn(
-                "fixed !max-w-none bottom-0 left-0 right-0 z-50 rounded-t-[10px] border-t border-gray-200 dark:border-brand-800 bg-white dark:bg-brand-950",
+                "fixed bottom-0 left-0 right-0 z-50 rounded-t-[10px] border-t border-gray-200 dark:border-brand-800 bg-white dark:bg-brand-950",
                 className
               )}
             >
@@ -96,7 +98,13 @@ export const Modal = ({
               </div>
 
               <div className="justify-between gap-4 p-4">
-                <Drawer.Title className="sr-only">Modal Drawer</Drawer.Title>
+                <Drawer.Title
+                  className={cn(
+                    title ? "text-2xl font-bold text-center" : "sr-only"
+                  )}
+                >
+                  {title || ""}
+                </Drawer.Title>
                 {children}
               </div>
             </Drawer.Content>
@@ -122,7 +130,12 @@ export const Modal = ({
           e.preventDefault()
         }}
       >
-        <DialogTitle className="sr-only">Modal Dialog</DialogTitle>
+        <DialogTitle
+          className={cn(title ? "text-2xl font-bold text-center" : "sr-only")}
+        >
+          {title || ""}
+        </DialogTitle>
+
         {children}
       </DialogContent>
     </Dialog>

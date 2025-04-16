@@ -1,9 +1,12 @@
 "use client"
 
-// import { AuthForm } from "@/components/auth/auth-form"
 import { Button } from "@/components/ui/button"
 import { Modal } from "@/components/ui/modal"
 import { useState } from "react"
+import { FcGoogle } from "react-icons/fc"
+import { FaApple } from "react-icons/fa"
+import Link from "next/link"
+import brand from "@/lib/brand.json"
 
 export const AuthButton = () => {
   const [showModal, setShowModal] = useState(false)
@@ -17,8 +20,46 @@ export const AuthButton = () => {
       </Button>
 
       {showModal && (
-        <Modal showModal={showModal} setShowModal={setShowModal}>
-          <p>test</p>
+        <Modal showModal={showModal} setShowModal={setShowModal} title="Login">
+          <div className="w-full space-y-6 p-6">
+            <div className="text-center space-y-2">
+              <p className="text-muted-foreground text-sm">
+                Sign in to continue
+              </p>
+            </div>
+
+            <div className="grid gap-4">
+              <Button
+                variant="outline"
+                className="flex items-center justify-center gap-2 h-12"
+              >
+                <FcGoogle className="h-5 w-5" />
+                <span>Continue with Google</span>
+              </Button>
+
+              <Button
+                variant="outline"
+                className="flex items-center justify-center gap-2 h-12"
+              >
+                <FaApple className="h-5 w-5" />
+                <span>Continue with Apple</span>
+              </Button>
+            </div>
+
+            <div className="text-center text-sm pt-4">
+              <p>
+                By continuing, you agree to {brand.BRAND}{" "}
+                <Link href={"/terms"} className="font-medium text-primary">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link href={"/privacy"} className="font-medium text-primary">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
         </Modal>
       )}
     </>
