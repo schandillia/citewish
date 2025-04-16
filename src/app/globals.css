@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Define dark variant to work with next-themes */
+@custom-variant dark (&:is(.dark *), &.dark);
 
 /* Custom theme color definitions */
 @theme {

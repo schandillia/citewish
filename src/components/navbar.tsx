@@ -22,7 +22,7 @@ export const Navbar = async () => {
       | "link"
   }[] = [
     { href: "/pricing", label: "Pricing", variant: "link" },
-    { href: "/test", label: "Test", variant: "link" },
+    { href: "/cite", label: "Cite", variant: "link" },
   ]
 
   return (
