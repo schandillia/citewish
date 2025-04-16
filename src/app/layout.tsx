@@ -4,6 +4,7 @@ import meta from "@/lib/meta.json"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import "./globals.css"
 import { cn } from "@/lib/utils"
+import { Toaster } from "sonner"
 
 export const metadata: Metadata = {
   title: meta.HOME.TITLE,
@@ -30,6 +31,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main className="relative flex-1 flex flex-col">{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
