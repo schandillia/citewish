@@ -3,6 +3,7 @@ import { MaxWidthWrapper } from "@/components//max-width-wrapper"
 import { Button, buttonVariants } from "@/components/ui/button"
 // import { auth } from "@/auth"
 import { BrandLogo } from "@/components/brand-logo"
+import { AuthButton } from "./auth/auth-button"
 // import { DashboardNavButton } from "@/components/dashboard-nav-button"
 // import UserNavMenu from "@/components/user-nav-menu"
 // import { AuthButton } from "@/components/auth/auth-button"
@@ -47,9 +48,7 @@ export const Navbar = async () => {
               </Link>
             ))}
             <div className="h-8 w-px bg-gray-200" />
-            <Button size="sm" variant="brand">
-              Login
-            </Button>
+            <AuthButton />
           </div>
         </div>
       </MaxWidthWrapper>
