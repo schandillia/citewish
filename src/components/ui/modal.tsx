@@ -4,7 +4,13 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 import { Dispatch, ReactNode, SetStateAction, useEffect } from "react"
 import { Drawer } from "vaul"
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { createPortal } from "react-dom"
 
 interface ModalProps {
@@ -16,6 +22,7 @@ interface ModalProps {
   desktopOnly?: boolean
   preventDefaultClose?: boolean
   title?: string
+  description?: string
 }
 
 export const Modal = ({
@@ -27,6 +34,7 @@ export const Modal = ({
   setShowModal,
   showModal,
   title,
+  description,
 }: ModalProps) => {
   const closeModal = ({ dragged }: { dragged?: boolean }) => {
     if (preventDefaultClose && !dragged) {
@@ -105,6 +113,15 @@ export const Modal = ({
                 >
                   {title || ""}
                 </Drawer.Title>
+                <Drawer.Description
+                  className={cn(
+                    description
+                      ? "text-center text-muted-foreground"
+                      : "sr-only"
+                  )}
+                >
+                  {description || ""}
+                </Drawer.Description>
                 {children}
               </div>
             </Drawer.Content>
@@ -130,12 +147,18 @@ export const Modal = ({
           e.preventDefault()
         }}
       >
-        <DialogTitle
-          className={cn(title ? "text-2xl font-bold text-center" : "sr-only")}
-        >
-          {title || ""}
-        </DialogTitle>
-
+        <DialogHeader>
+          <DialogTitle
+            className={cn(title ? "text-2xl font-bold text-center" : "sr-only")}
+          >
+            {title || ""}
+          </DialogTitle>
+          <DialogDescription
+            className={cn(description ? "text-center" : "sr-only")}
+          >
+            {description || ""}
+          </DialogDescription>
+        </DialogHeader>
         {children}
       </DialogContent>
     </Dialog>

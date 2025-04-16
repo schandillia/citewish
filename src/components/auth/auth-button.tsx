@@ -20,14 +20,13 @@ export const AuthButton = () => {
       </Button>
 
       {showModal && (
-        <Modal showModal={showModal} setShowModal={setShowModal} title="Login">
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          title="Login"
+          description="Sign in to continue"
+        >
           <div className="w-full space-y-6 p-6">
-            <div className="text-center space-y-2">
-              <p className="text-muted-foreground text-sm">
-                Sign in to continue
-              </p>
-            </div>
-
             <div className="grid gap-4">
               <Button
                 variant="outline"
@@ -46,7 +45,7 @@ export const AuthButton = () => {
               </Button>
             </div>
 
-            <div className="text-center text-sm pt-4">
+            <div className="text-center text-xs text-muted-foreground pt-4">
               <p>
                 By continuing, you agree to {brand.BRAND}{" "}
                 <Link href={"/terms"} className="font-medium text-primary">
