@@ -2,7 +2,7 @@
 
 import { signIn } from "@/auth"
 import { signOut } from "@/auth"
-// import { publicRoutes } from "@/routes"
+import { publicRoutes } from "@/routes"
 
 export async function signInWithGoogle(callbackUrl?: string) {
   await signIn("google", {
@@ -11,8 +11,8 @@ export async function signInWithGoogle(callbackUrl?: string) {
 }
 
 export async function logOut(currentPath: string) {
-  //   const isPublicRoute = publicRoutes.has(currentPath) // Changed from includes() to has()
+  const isPublicRoute = publicRoutes.has(currentPath) // Changed from includes() to has()
   await signOut({
-    // redirectTo: isPublicRoute ? currentPath : "/",
+    redirectTo: isPublicRoute ? currentPath : "/",
   })
 }
