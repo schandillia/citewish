@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { bodyFont, accentFont } from "@/lib/fonts"
+import { bodyFont, headingFont } from "@/lib/fonts"
 import meta from "@/lib/meta.json"
 
 import "./globals.css"
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn(bodyFont.variable, accentFont.variable)}>
+    <html lang="en" className={cn(bodyFont.variable, headingFont.variable)}>
       <body className="min-h-[calc(100vh-1px)] flex flex-col font-sans text-brand-950 antialiased">
         <main className="relative flex-1 flex flex-col">{children}</main>
       </body>
