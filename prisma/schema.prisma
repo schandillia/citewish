@@ -1,0 +1,47 @@
+generator client {
+  provider       = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  output          = "./node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  name           String?  // Optional, can be null or empty for users who don't provide it
+  image          String?  // Optional, for storing the user's profile image URL
+
+  plan           Plan @default(FREE)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Added fields
+  sessions       Session[]
+}
+
+// Session model for managing user sessions
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

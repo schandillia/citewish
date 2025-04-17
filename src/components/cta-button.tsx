@@ -28,7 +28,7 @@ export const CTAButton = ({
 
         <div className="custom-ease absolute -left-[75px] -top-[50px] -z-10 h-[155px] w-8 rotate-[135deg] bg-white opacity-20 transition-all duration-500 group-hover:left-[120%]" />
       </Link>
-      <p className="text-sm text-gray-500 dark:text-gray-400 tracking-tight opacity-80">
+      <p className="text-sm text-muted-foreground tracking-tight opacity-80">
         Flexible commitment · Zero upfront costs
       </p>
     </div>
