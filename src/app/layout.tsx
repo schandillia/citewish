@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
 import { bodyFont, headingFont } from "@/lib/fonts"
-import meta from "@/lib/meta.json"
-import { ThemeProvider } from "@/components/theme/theme-provider"
+import meta from "@/lib/data/meta.json"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import { Toaster } from "sonner"
+import { ThemeProvider } from "next-themes"
 
 export const metadata: Metadata = {
   title: meta.HOME.TITLE,
   description: meta.HOME.DESCRIPTION,
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 }
 
 export default function RootLayout({

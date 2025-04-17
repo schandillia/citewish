@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { ArrowRight } from "lucide-react"
+import { LuArrowRight } from "react-icons/lu"
 import Link from "next/link"
 import { AnchorHTMLAttributes } from "react"
 
@@ -23,7 +23,7 @@ export const CTAButton = ({
       >
         <span className="relative z-10 flex items-center gap-2">
           {children}
-          <ArrowRight className="size-4 shrink-0 text-white transition-transform duration-300 ease-in-out group-hover:translate-x-[2px]" />
+          <LuArrowRight className="size-4 shrink-0 text-white transition-transform duration-300 ease-in-out group-hover:translate-x-[2px]" />
         </span>
 
         <div className="custom-ease absolute -left-[75px] -top-[50px] -z-10 h-[155px] w-8 rotate-[135deg] bg-white opacity-20 transition-all duration-500 group-hover:left-[120%]" />

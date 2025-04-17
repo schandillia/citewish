@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MaxWidthWrapper } from "@/components//max-width-wrapper"
+import { Wrapper } from "@/components/wrapper"
 import { Button, buttonVariants } from "@/components/ui/button"
 // import { auth } from "@/auth"
 import { BrandLogo } from "@/components/brand-logo"
@@ -28,7 +28,7 @@ export const Navbar = async () => {
 
   return (
     <nav className="sticky z-50 h-16 inset-x-0 top-0 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-brand-900/75 backdrop-blur-lg transition-all">
-      <MaxWidthWrapper>
+      <Wrapper>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex z-40 font-semibold">
             <BrandLogo />
@@ -51,7 +51,7 @@ export const Navbar = async () => {
             <AuthButton />
           </div>
         </div>
-      </MaxWidthWrapper>
+      </Wrapper>
     </nav>
   )
 }

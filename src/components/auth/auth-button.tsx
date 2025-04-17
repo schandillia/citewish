@@ -6,7 +6,7 @@ import { useState } from "react"
 import { FcGoogle } from "react-icons/fc"
 import { FaApple } from "react-icons/fa"
 import Link from "next/link"
-import brand from "@/lib/brand.json"
+import brand from "@/lib/data/brand.json"
 
 import { signInWithGoogle } from "@/app/actions/auth"
 import { usePathname, useSearchParams } from "next/navigation"

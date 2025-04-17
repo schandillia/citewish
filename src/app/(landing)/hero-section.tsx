@@ -1,19 +1,9 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import {
-  ArrowRight,
-  BookMarked,
-  CircleCheck,
-  Search,
-  Share2,
-  Sparkles,
-} from "lucide-react"
-import { MaxWidthWrapper } from "@/components/max-width-wrapper"
+import { Wrapper } from "@/components/wrapper"
 import { Heading } from "@/components/heading"
-import brand from "@/lib/brand.json"
-import features from "@/lib/features.json"
+import brand from "@/lib/data/brand.json"
+import features from "@/lib/data/features.json"
 import { CTAButton } from "@/components/cta-button"
+import { LuCircleCheck, LuSparkles } from "react-icons/lu"
 
 export default function HeroSection() {
   return (
@@ -21,14 +11,14 @@ export default function HeroSection() {
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000,transparent)]" />
 
-      <MaxWidthWrapper>
+      <Wrapper>
         <div className="flex">
           {/* Left */}
           <div className="flex-grow md:basis-2/3">
             <div className="relative mx-auto flex flex-col items-center sm:items-start gap-8 sm:gap-10">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-300/30 dark:bg-brand-500/5">
-                <Sparkles className="size-4 text-brand-600 dark:text-brand-300" />
+                <LuSparkles className="size-4 text-brand-600 dark:text-brand-300" />
                 <span className="text-sm font-medium text-brand-600 dark:text-brand-300">
                   Now with AI-powered citation detection
                 </span>
@@ -64,7 +54,7 @@ export default function HeroSection() {
                     key={index}
                     className="flex items-start gap-3 sm:justify-start"
                   >
-                    <CircleCheck className="size-5 shrink-0 text-brand-700 dark:text-brand-300 mt-1" />
+                    <LuCircleCheck className="size-5 shrink-0 text-brand-700 dark:text-brand-300 mt-1" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -77,7 +67,7 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-      </MaxWidthWrapper>
+      </Wrapper>
     </section>
   )
 }

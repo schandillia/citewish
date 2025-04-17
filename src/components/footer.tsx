@@ -2,9 +2,9 @@ import React from "react"
 
 import Link from "next/link"
 
-import { MaxWidthWrapper } from "@/components/max-width-wrapper"
+import { Wrapper } from "@/components/wrapper"
 import { buttonVariants } from "@/components/ui/button"
-import brand from "@/lib/brand.json"
+import brand from "@/lib/data/brand.json"
 import ThemeToggle from "@/components/theme/theme-toggle"
 
 // Get the current year dynamically
@@ -31,7 +31,7 @@ export default function Footer() {
         className="inset-x-0 bottom-0 w-full border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-brand-900/75 text-sm text-soft dark:text-white/70"
         role="contentinfo"
       >
-        <MaxWidthWrapper>
+        <Wrapper>
           <div
             className="flex flex-col sm:flex-row py-5 sm:h-14 items-center justify-between"
             aria-label="Footer content"
@@ -74,7 +74,7 @@ export default function Footer() {
               <ThemeToggle />
             </div>
           </div>
-        </MaxWidthWrapper>
+        </Wrapper>
       </div>
     </>
   )

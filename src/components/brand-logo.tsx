@@ -1,4 +1,4 @@
-import brand from "@/lib/brand.json"
+import brand from "@/lib/data/brand.json"
 
 interface Brand {
   BRAND?: string

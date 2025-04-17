@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { Computer, MoonStar, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { PiMoonStars, PiSun } from "react-icons/pi"
+import { LuComputer } from "react-icons/lu"
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -39,18 +40,20 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      className="rounded-full dark:hover:bg-brand-950/70"
+      className="rounded-full dark:hover:bg-brand-950/70 cursor-pointer"
       variant="outline"
       size="icon"
       onClick={cycleTheme}
       aria-label="Toggle theme"
     >
-      {currentTheme === "light" && <Sun className="size-4" strokeWidth={1.5} />}
+      {currentTheme === "light" && (
+        <PiSun className="size-4" strokeWidth={1.5} />
+      )}
       {currentTheme === "dark" && (
-        <MoonStar className="size-4" strokeWidth={1.5} />
+        <PiMoonStars className="size-4" strokeWidth={1.5} />
       )}
       {currentTheme === "system" && (
-        <Computer className="size-4" strokeWidth={1.5} />
+        <LuComputer className="size-4" strokeWidth={1.5} />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

@@ -1,27 +1,56 @@
-// src/db/prisma.ts
+// src/prisma.ts
+import { Pool } from "@neondatabase/serverless"
+import { PrismaNeon } from "@prisma/adapter-neon"
 import { PrismaClient } from "@prisma/client"
+
+// Add debugging output
+console.log("PRISMA INIT - Environment check")
+console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL)
+console.log("NODE_ENV:", process.env.NODE_ENV)
 
 declare global {
   // eslint-disable-next-line no-var
-  var cachedPrisma: PrismaClient
+  var cachedPrisma: PrismaClient | undefined
 }
 
-// Only initialize Prisma in non-edge environments
-function getPrismaClient() {
-  if (process.env.NEXT_RUNTIME === "edge") {
-    // Return a mock or limited client for Edge
-    throw new Error("Prisma Client cannot be used in Edge Runtime")
-  }
+let prisma: PrismaClient
 
-  // Only initialize in non-edge environments
+// Check if DATABASE_URL exists, if not, try to fallback to a local connection
+const connectionString = process.env.DATABASE_URL
+
+if (!connectionString) {
+  console.error(
+    "⚠️ DATABASE_URL is not set! Attempting to use default local connection."
+  )
+  throw new Error(
+    "DATABASE_URL environment variable is not set. Please check your .env.local file."
+  )
+}
+
+try {
   if (process.env.NODE_ENV === "production") {
-    return new PrismaClient()
+    console.log("Creating production Prisma client")
+    // In production, create a new connection each time
+    const pool = new Pool({ connectionString })
+    const adapter = new PrismaNeon(pool as any)
+    prisma = new PrismaClient({ adapter })
+    console.log("Production Prisma client created successfully")
   } else {
+    console.log("Creating development Prisma client")
+    // In development, reuse connections to improve performance
     if (!global.cachedPrisma) {
-      global.cachedPrisma = new PrismaClient()
+      const pool = new Pool({ connectionString })
+      const adapter = new PrismaNeon(pool as any)
+      global.cachedPrisma = new PrismaClient({ adapter })
+      console.log("Development Prisma client cached successfully")
+    } else {
+      console.log("Using cached Prisma client")
     }
-    return global.cachedPrisma
+    prisma = global.cachedPrisma
   }
+} catch (error) {
+  console.error("Failed to initialize Prisma client:", error)
+  throw error
 }
 
-export const db = getPrismaClient()
+export const db = prisma
