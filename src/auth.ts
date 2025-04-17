@@ -1,14 +1,14 @@
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import Google from "next-auth/providers/google"
 import NextAuth from "next-auth"
 import { prisma } from "@/lib/prisma-edge"
+import authConfig from "./auth.config"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,
-  providers: [Google],
+  ...authConfig, // Spread the config from auth.config.ts
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: "jwt", // Makes sure JWT is not used
+    strategy: "jwt", // Makes sure JWT is used
   },
   pages: {
     signIn: "/signin",

@@ -13,7 +13,6 @@ export default {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          quotaLimit: 100,
         }
       },
     }),
