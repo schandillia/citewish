@@ -1,6 +1,13 @@
 import { ReactNode } from "react"
 import { Navbar } from "@/components/nav/navbar"
 import Footer from "@/components/footer"
+import meta from "@/lib/data/meta.json"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: meta.DASHBOARD.TITLE,
+  description: meta.DASHBOARD.DESCRIPTION,
+}
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
