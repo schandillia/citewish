@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import NextAuth from "next-auth"
-import { prisma } from "@/lib/prisma-edge" // Make sure this path is correct
+import { db } from "@/lib/prisma-edge" // Make sure this path is correct
 import authConfig from "./auth.config"
 import { DefaultSession } from "next-auth"
 
@@ -16,7 +16,7 @@ declare module "next-auth" {
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,
   ...authConfig,
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
   },

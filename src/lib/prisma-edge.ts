@@ -12,6 +12,6 @@ if (!connectionString) {
 const adapter = new PrismaNeon({ connectionString })
 
 // Create Prisma client
-export const prisma = new PrismaClient({
+export const db = new PrismaClient({
   adapter,
 })

@@ -1,15 +1,15 @@
 import Link from "next/link"
 import { Wrapper } from "@/components/wrapper"
-import { Button, buttonVariants } from "@/components/ui/button"
-// import { auth } from "@/auth"
-import { BrandLogo } from "@/components/brand-logo"
-import { AuthButton } from "./auth/auth-button"
+import { buttonVariants } from "@/components/ui/button"
+import { auth } from "@/auth"
+import { BrandLogo } from "@/components/nav/brand-logo"
+import { AuthButton } from "@/components/auth/auth-button"
+import UserNavMenu from "@/components/nav/user-nav-menu"
 // import { DashboardNavButton } from "@/components/dashboard-nav-button"
 // import UserNavMenu from "@/components/user-nav-menu"
-// import { AuthButton } from "@/components/auth/auth-button"
 
 export const Navbar = async () => {
-  //   const session = await auth()
+  const session = await auth()
 
   const guestLinks: {
     href: string
@@ -35,20 +35,28 @@ export const Navbar = async () => {
           </Link>
 
           <div className="h-full flex items-center space-x-4">
-            {guestLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`${buttonVariants({
-                  size: "sm",
-                  variant: link.variant,
-                })} dark:text-brand-50`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="h-8 w-px bg-gray-200" />
-            <AuthButton />
+            {session?.user ? (
+              <>
+                <UserNavMenu user={session.user} />
+              </>
+            ) : (
+              <>
+                {guestLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`${buttonVariants({
+                      size: "sm",
+                      variant: link.variant,
+                    })} dark:text-brand-50`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="h-8 w-px bg-gray-200" />
+                <AuthButton />
+              </>
+            )}
           </div>
         </div>
       </Wrapper>

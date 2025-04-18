@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "sonner"
 import { ThemeProvider } from "next-themes"
 import { auth } from "@/auth"
-import { prisma } from "@/lib/prisma-edge"
+import { db } from "@/lib/prisma-edge"
+import { AuthProvider } from "@/components/auth/auth-provider"
 
 export const metadata: Metadata = {
   title: meta.HOME.TITLE,
@@ -24,7 +25,7 @@ export default async function RootLayout({
   if (session?.user?.id) {
     console.log("SESSION.USER.ID: ", session.user.id)
     try {
-      user = await prisma.user.findUnique({
+      user = await db.user.findUnique({
         where: { id: session.user.id },
       })
     } catch (error) {
@@ -41,15 +42,17 @@ export default async function RootLayout({
       className={cn(bodyFont.variable, headingFont.variable)}
     >
       <body className="min-h-[calc(100vh-1px)] flex flex-col font-sans text-brand-950 antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <main className="relative flex-1 flex flex-col">{children}</main>
-          <Toaster />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="relative flex-1 flex flex-col">{children}</main>
+            <Toaster />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )
