@@ -12,7 +12,7 @@ import { DashboardNavButton } from "@/components/nav/dashboard-nav-button"
 export const Navbar = async () => {
   const session = await auth()
 
-  const guestLinks: {
+  const navLinks: {
     href: string
     label: string
     variant:
@@ -36,6 +36,18 @@ export const Navbar = async () => {
           </Link>
 
           <div className="h-full flex items-center space-x-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`${buttonVariants({
+                  size: "sm",
+                  variant: link.variant,
+                })} dark:text-brand-50`}
+              >
+                {link.label}
+              </Link>
+            ))}
             {session?.user ? (
               <>
                 <DashboardNavButton />
@@ -43,7 +55,7 @@ export const Navbar = async () => {
               </>
             ) : (
               <>
-                {guestLinks.map((link) => (
+                {/* {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -54,7 +66,7 @@ export const Navbar = async () => {
                   >
                     {link.label}
                   </Link>
-                ))}
+                ))} */}
                 <div className="h-8 w-px bg-gray-200" />
                 <AuthButton />
               </>

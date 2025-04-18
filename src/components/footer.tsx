@@ -1,7 +1,5 @@
 import React from "react"
-
 import Link from "next/link"
-
 import { Wrapper } from "@/components/wrapper"
 import { buttonVariants } from "@/components/ui/button"
 import brand from "@/lib/data/brand.json"
@@ -25,57 +23,53 @@ const links: LinkItem[] = [
 
 export default function Footer() {
   return (
-    <>
-      {/* <div className="flex-grow" /> */}
-      <div
-        className="inset-x-0 bottom-0 w-full border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-brand-900/75 text-sm text-soft dark:text-white/70"
-        role="contentinfo"
-      >
-        <Wrapper>
-          <div
-            className="flex flex-col sm:flex-row py-5 sm:h-14 items-center justify-between"
-            aria-label="Footer content"
-          >
-            {/* Copyright Section */}
-            <div className="flex py-2 sm:py-0">
-              <span className="text-gray-600 dark:text-gray-300">
-                &copy; {d.getFullYear()} {brand.COMPANY}
-              </span>
-            </div>
+    <footer
+      className="w-full border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-brand-900/75 text-sm text-soft dark:text-white/70"
+      role="contentinfo"
+    >
+      <Wrapper>
+        <div className="flex flex-col sm:flex-row py-6 sm:py-4 items-center justify-between">
+          {/* Copyright Section */}
+          <div className="mb-4 sm:mb-0">
+            <span className="text-gray-600 dark:text-gray-300">
+              &copy; {d.getFullYear()} {brand.COMPANY}
+            </span>
+          </div>
 
-            {/* Footer Links Section */}
-            <div
-              className="flex py-2 sm:py-0 gap-4 items-center flex-wrap max-w-full overflow-hidden"
-              aria-label="Footer links"
-            >
+          {/* Footer Links Section */}
+          <div className="flex items-center">
+            <nav className="flex flex-wrap justify-center sm:justify-end gap-1 sm:gap-0">
               {links.map((link, index) => (
                 <React.Fragment key={link.id}>
                   <Link
                     href={`/${link.id}`}
                     className={buttonVariants({
-                      variant: "link", // Use the "link" variant for button-like links
-                      size: "sm", // Set to small size
-                      className: "dark:text-brand-50", // Apply dark mode text color
+                      variant: "link",
+                      size: "sm",
+                      className: "dark:text-brand-50 px-3",
                     })}
-                    aria-label={`Go to ${link.text} page`} // Ensure each link has a descriptive label
+                    aria-label={`Go to ${link.text} page`}
                   >
                     {link.text}
                   </Link>
 
-                  {/* Divider - border between links */}
+                  {/* Divider */}
                   {index !== links.length - 1 && (
                     <div
-                      className="border-l border-gray-300 dark:border-gray-500 h-6"
+                      className="hidden sm:block border-l border-gray-300 dark:border-gray-500 h-5"
                       aria-hidden="true"
                     />
                   )}
                 </React.Fragment>
               ))}
+            </nav>
+
+            <div className="ml-2 mt-0">
               <ThemeToggle />
             </div>
           </div>
-        </Wrapper>
-      </div>
-    </>
+        </div>
+      </Wrapper>
+    </footer>
   )
 }

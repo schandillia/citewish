@@ -7,6 +7,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: meta.CITE.TITLE,
   description: meta.CITE.DESCRIPTION,
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 }
 
 const Layout = ({ children }: { children: ReactNode }) => {
