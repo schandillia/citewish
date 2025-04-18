@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <>
       <Wrapper className="py-4">
-        <div>dashboard</div>
+        <div>cite</div>
       </Wrapper>
     </>
   )
