@@ -5,6 +5,8 @@ import "./globals.css"
 import { cn } from "@/lib/utils"
 import { Toaster } from "sonner"
 import { ThemeProvider } from "next-themes"
+import { auth } from "@/auth"
+import { prisma } from "@/lib/prisma-edge"
 
 export const metadata: Metadata = {
   title: meta.HOME.TITLE,
@@ -12,11 +14,26 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.svg" }],
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await auth()
+  let user = null
+  if (session?.user?.id) {
+    console.log("SESSION.USER.ID: ", session.user.id)
+    try {
+      user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+      })
+    } catch (error) {
+      console.error("Error fetching user:", error)
+    }
+  } else {
+    console.log("No user session or ID found.")
+  }
+
   return (
     <html
       lang="en"

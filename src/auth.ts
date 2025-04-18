@@ -1,14 +1,24 @@
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import NextAuth from "next-auth"
-import { prisma } from "@/lib/prisma-edge"
+import { prisma } from "@/lib/prisma-edge" // Make sure this path is correct
 import authConfig from "./auth.config"
+import { DefaultSession } from "next-auth"
+
+// Extend the Session type to include user.id
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string
+    } & DefaultSession["user"]
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,
-  ...authConfig, // Spread the config from auth.config.ts
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: "jwt", // Makes sure JWT is used
+    strategy: "jwt",
   },
   pages: {
     signIn: "/signin",
@@ -16,6 +26,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     authorized: async ({ auth }) => {
       return !!auth
+    },
+    session: async ({ session, token }) => {
+      if (session?.user && token.sub) {
+        session.user.id = token.sub
+      }
+      return session
+    },
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.id = user.id
+      }
+      return token
     },
   },
 })
