@@ -5,6 +5,7 @@ import { auth } from "@/auth"
 import { BrandLogo } from "@/components/nav/brand-logo"
 import { AuthButton } from "@/components/auth/auth-button"
 import UserNavMenu from "@/components/nav/user-nav-menu"
+import { DashboardNavButton } from "@/components/nav/dashboard-nav-button"
 // import { DashboardNavButton } from "@/components/dashboard-nav-button"
 // import UserNavMenu from "@/components/user-nav-menu"
 
@@ -37,6 +38,7 @@ export const Navbar = async () => {
           <div className="h-full flex items-center space-x-4">
             {session?.user ? (
               <>
+                <DashboardNavButton />
                 <UserNavMenu user={session.user} />
               </>
             ) : (
